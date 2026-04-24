@@ -10,8 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_20_132506) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_123951) do
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "generes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hobbies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "genere_id"
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genere_id"], name: "index_hobbies_on_genere_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "like_user_id_id"
+    t.integer "liked_uesr_id_id"
+    t.datetime "updated_at", null: false
+    t.index ["like_user_id_id"], name: "index_likes_on_like_user_id_id"
+    t.index ["liked_uesr_id_id"], name: "index_likes_on_liked_uesr_id_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "conversation_id"
+    t.datetime "created_at", null: false
+    t.string "string", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "user_conversations", force: :cascade do |t|
+    t.integer "conversation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["user_id"], name: "index_user_conversations_on_user_id"
+  end
+
+  create_table "user_hobbies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "hobby_id"
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["hobby_id"], name: "index_user_hobbies_on_hobby_id"
+    t.index ["user_id"], name: "index_user_hobbies_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
+    t.integer "age", null: false
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -20,7 +84,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_20_132506) do
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.datetime "updated_at", null: false
+    t.string "user_image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "hobbies", "generes"
+  add_foreign_key "likes", "users", column: "like_user_id_id"
+  add_foreign_key "likes", "users", column: "liked_uesr_id_id"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
+  add_foreign_key "user_conversations", "conversations"
+  add_foreign_key "user_conversations", "users"
+  add_foreign_key "user_hobbies", "hobbies"
+  add_foreign_key "user_hobbies", "users"
 end
