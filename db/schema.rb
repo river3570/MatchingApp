@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_123951) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_27_113630) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -56,6 +56,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_123951) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "context", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "user_conversations", force: :cascade do |t|
     t.integer "conversation_id"
     t.datetime "created_at", null: false
@@ -94,6 +102,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_123951) do
   add_foreign_key "likes", "users", column: "liked_uesr_id_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
   add_foreign_key "user_hobbies", "hobbies"
