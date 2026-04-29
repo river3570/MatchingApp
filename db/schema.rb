@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_27_113630) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_29_100512) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "generes", force: :cascade do |t|
+  create_table "genders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
@@ -87,13 +87,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_113630) do
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "nickname"
+    t.integer "gender_id", null: false
+    t.string "nickname", null: false
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.datetime "updated_at", null: false
     t.string "user_image"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["gender_id"], name: "index_users_on_gender_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -107,4 +109,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_113630) do
   add_foreign_key "user_conversations", "users"
   add_foreign_key "user_hobbies", "hobbies"
   add_foreign_key "user_hobbies", "users"
+  add_foreign_key "users", "genders"
 end
