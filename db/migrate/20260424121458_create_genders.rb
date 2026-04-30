@@ -1,6 +1,6 @@
-class CreateGeneres < ActiveRecord::Migration[8.1]
+class CreateGenders < ActiveRecord::Migration[8.1]
   def change
-    create_table :generes do |t|
+    create_table :genders do |t|
       t.string :name, null: false
 
       t.timestamps
