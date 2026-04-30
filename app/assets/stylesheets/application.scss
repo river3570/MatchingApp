@@ -1,2 +1,4 @@
-@use './pages/index'
-
+@use "bases/index";
+@use "commons/index";
+@use "layouts/index";
+@use "pages/index";
