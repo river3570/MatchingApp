@@ -1,0 +1,23 @@
+@use "../../commons/variables" as var;
+
+.form-frame {
+  width: 62.5%;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var.$base-background-color;
+  margin-top: 90px;
+  padding: 50px 0 80px;
+}
+
+.user-new-form-container {
+  width: 62.5%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.user-new-form {
+  margin-top: 43px;
+}
+
+.field {
+}
