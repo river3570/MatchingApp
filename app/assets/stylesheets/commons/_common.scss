@@ -3,3 +3,25 @@
   width: 85%;
   margin: 0 auto;
 }
+
+input,
+select {
+  border: none;
+  padding: 10px 10px;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
