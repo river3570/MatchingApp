@@ -1,0 +1,29 @@
+.sign-up
+  .sign-up__container
+    .sign-up__heading
+      = image_tag 'sing-up.png', alt: "sign-up__thumbnail", class: "sign-up__thumbnail"
+      %h2.sign-up__title 新規登録
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "sign-up__form"}) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .sign-up__field
+        %p= f.label :email, "メールアドレス", class: "sign-up__label"
+        %p= f.email_field :email, autofocus: true, autocomplete: "email", class: "sign-up__input", placeholder: "メールアドレス"
+      .sign-up__field
+        %p= f.label :nickname, "ニックネーム", class: "sign-up__label"
+        %p= f.text_field :nickname, autofocus: true, autocomplete: "nickname", class: "sign-up__input", placeholder: "ニックネーム"
+      .sign-up__field-group
+        .sign-up__field.sign-up__field--age
+          %p= f.label :age, "年齢", class: "sign-up__label"
+          %p= f.number_field :age, autofocus: true, autocomplete: "age", class: "sign-up__input", placeholder: "年齢"
+        .sign-up__field.sign-up__field--gender
+          %p= f.label :gender_id, "性別", class: "sign-up__label"
+          %p= f.collection_select :gender_id, Gender.all, :id, :name, {prompt: "-----"}, {class: "sign-up__input"}
+      .sign-up__field
+        %p= f.label :password, "パスワード", class: "sign-up__label"
+        %p= f.password_field :password, autocomplete: "new-password", class: "sign-up__input", placeholder: "パスワード"
+      .sign-up__field
+        %p= f.label :password_confirmation, "パスワード再確認", class: "sign-up__label"
+        %p= f.password_field :password_confirmation, autocomplete: "new-password", class: "sign-up__input", placeholder: "パスワード再確認"
+      .sign-up__actions
+        = f.submit "登録", class: "sign-up__submit"
+    = render "devise/shared/links"
