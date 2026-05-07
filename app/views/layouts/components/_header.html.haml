@@ -5,9 +5,16 @@
       %h1.header__title マッチングアプリ
     .header__nav 
       - if user_signed_in?
-      - else
         = link_to "ユーザー一覧", new_user_session_path, class: "header__nav-link"
         = link_to "通知", new_user_session_path, class: "header__nav-link"
         = link_to "チャット", new_user_session_path, class: "header__nav-link"
-        = image_tag 'user-icon.jpg', alt: "user-icon", class: "header__user-icon"
-        -# = link_to "ログイン", new_user_session_path, class: "header__link--login"
+        .header__img-container
+          = image_tag 'user-icon.jpg', alt: "user-icon", class: "header__user-icon"
+          %ul.dropdown
+            %li.dropdown__item
+              = link_to "マイページ", new_user_session_path, class: "dropdown__item-link"
+            %li.dropdown__item
+              = link_to "ログアウト", destroy_user_session_path, class: "dropdown__item-link dropdown__item-link--logout"
+      - else
+        = link_to "ログイン", new_user_session_path, class: "header__link--login"
+
