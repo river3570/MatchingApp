@@ -1,0 +1,55 @@
+@use "../commons/variables" as var;
+
+.header {
+  display: flex;
+  align-items: center;
+  background-color: var.$base-background-color;
+  height: 70px;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    max-width: 50px;
+    min-height: 50px;
+  }
+
+  &__title {
+    color: var.$base-main-color;
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__nav-link {
+    color: var.$base-font-color;
+  }
+
+  &__user-icon {
+    max-width: 40px;
+    min-height: 40px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+  }
+
+  &__link--login {
+    color: var.$base-button-font-color;
+    background-color: var.$base-main-color;
+    padding: 10px 28px;
+    border-radius: 10px;
+  }
+}

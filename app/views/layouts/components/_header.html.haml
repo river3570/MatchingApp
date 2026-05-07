@@ -1,0 +1,13 @@
+%header.header
+  .header__container.container 
+    .header__heading 
+      = image_tag 'app-icon.png', alt: "app-icon", class: "header__icon"
+      %h1.header__title マッチングアプリ
+    .header__nav 
+      - if user_signed_in?
+      - else
+        = link_to "ユーザー一覧", new_user_session_path, class: "header__nav-link"
+        = link_to "通知", new_user_session_path, class: "header__nav-link"
+        = link_to "チャット", new_user_session_path, class: "header__nav-link"
+        = image_tag 'user-icon.jpg', alt: "user-icon", class: "header__user-icon"
+        -# = link_to "ログイン", new_user_session_path, class: "header__link--login"
