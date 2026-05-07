@@ -41,6 +41,10 @@
 
   &__img-container {
     position: relative;
+
+    &:hover .dropdown {
+      display: block;
+    }
   }
 
   &__user-icon {
@@ -57,37 +61,4 @@
     padding: 10px 28px;
     border-radius: 10px;
   }
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  top: 45px;
-  right: 0;
-  width: max-content;
-  border: black solid 1px;
-
-  &__item {
-    list-style: none;
-    padding: 10px;
-    background-color: var.$base-background-color;
-
-    &:not(:first-child) {
-      border-top: black solid 1px;
-    }
-
-    &-link {
-      color: black;
-
-      &--logout {
-        color: red;
-      }
-    }
-  }
-}
-
-.header__img-container:hover .dropdown {
-  display: block;
 }
