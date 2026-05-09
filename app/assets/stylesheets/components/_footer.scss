@@ -1,0 +1,18 @@
+@use "../commons/variables" as var;
+
+.footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: var.$base-background-color;
+  height: 40px;
+  margin-top: 50px;
+
+  &__container {
+  }
+
+  &__copyright {
+    font-size: 15px;
+    text-align: center;
+  }
+}
