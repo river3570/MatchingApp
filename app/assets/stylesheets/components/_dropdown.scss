@@ -1,0 +1,30 @@
+@use "../commons/variables" as var;
+
+.dropdown {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 40px;
+  right: 0;
+  width: max-content;
+  border: black solid 1px;
+
+  &__item {
+    list-style: none;
+    padding: 10px;
+    background-color: var.$base-background-color;
+
+    &:not(:first-child) {
+      border-top: black solid 1px;
+    }
+
+    &-link {
+      color: black;
+
+      &--logout {
+        color: red;
+      }
+    }
+  }
+}

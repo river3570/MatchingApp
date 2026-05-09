@@ -16,5 +16,6 @@
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
+    = render "layouts/components/header"
     .container
       = yield
