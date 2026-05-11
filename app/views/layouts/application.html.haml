@@ -18,5 +18,7 @@
   %body
     = render "layouts/components/header"
     .container
+      %p.notice #{notice} 
+      %p.alert #{alert}
       = yield
     = render "layouts/components/footer"
