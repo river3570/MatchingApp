@@ -1,5 +1,5 @@
-.sign-in
-  .sign-in__container.container 
+.sign-in.container
+  .sign-in__container 
     .sign-in__heading
       = image_tag 'sing-up.png', alt: "sign-up__thumbnail", class: "sign-in__thumbnail"
       %h2.sign-in__title ログイン
@@ -11,7 +11,7 @@
       .sign-in__field 
         %p= f.label :email, "パスワード", class: "sign-in__label"
         %p= f.password_field :password, autocompete: "password", class: "sign-in__input", placeholder: "パスワード"
-        %p.password_forget__link パスワードを忘れた方は#{link_to "こちら", new_password_path(resource_name)}
+        %p.password-forget__link パスワードを忘れた方は#{link_to "こちら", new_password_path(resource_name)}
       .sign-in__actions 
-        = f.submit "ログイン", class: "sign_in__submit"
+        = f.submit "ログイン", class: "sign-in__submit"
         %p.sign-up__link 新規登録は#{link_to "こちら", new_registration_path(resource_name)}
