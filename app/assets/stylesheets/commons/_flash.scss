@@ -1,0 +1,76 @@
+@use "./variables" as var;
+
+.notice__container,
+.alert__container {
+  position: relative;
+  padding: 10px;
+  margin: 20px 0;
+  text-align: center;
+  border-radius: 5px;
+
+  &:has(#cross:checked) {
+    display: none;
+  }
+}
+
+.notice__container {
+  border: solid var.$notice-main-color 1px;
+  background-color: rgba(var.$notice-main-color, 0.1);
+  color: var.$notice-main-color;
+}
+
+.alert__container {
+  border: solid var.$alert-main-color 1px;
+  background-color: rgba(var.$alert-main-color, 0.1);
+  color: var.$alert-main-color;
+}
+
+#cross {
+  display: none;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.icon__cross {
+  display: inline-block;
+  position: absolute;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    width: 2px;
+    height: 15px;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.notice__cross {
+  &::before,
+  &::after {
+    background: var.$notice-main-color;
+  }
+}
+
+.alert__cross {
+  &::before,
+  &::after {
+    background: var.$alert-main-color;
+  }
+}

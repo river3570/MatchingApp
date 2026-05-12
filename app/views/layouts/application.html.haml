@@ -18,7 +18,6 @@
   %body
     = render "layouts/components/header"
     .container
-      %p.notice #{notice} 
-      %p.alert #{alert}
+      = render "shared/flash"
       = yield
     = render "layouts/components/footer"
