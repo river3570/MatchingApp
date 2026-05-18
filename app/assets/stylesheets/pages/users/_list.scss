@@ -1,0 +1,156 @@
+@use "../../commons/variables" as var;
+
+.user-list {
+  &__container {
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    margin-top: 85px;
+  }
+
+  &__title {
+    font-size: var.$base-header-font-size;
+    font-weight: normal;
+  }
+
+  &__hobby-lists,
+  &__age-lists {
+    background-color: var.$base-sub-background-color;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(#000000, 0.25);
+  }
+
+  &__hobby-lists {
+    margin-left: 75px;
+  }
+
+  &__age-lists {
+    margin-left: 28px;
+  }
+
+  &__cards {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(calc(100% / 4 - 35px), 1fr)
+    );
+    gap: 35px;
+  }
+
+  &__card {
+    display: inline-block;
+    background-color: var.$base-sub-background-color;
+    border-radius: 10px;
+    padding: 20px 0;
+    color: var.$base-font-color;
+    box-shadow: 0 4px 4px 0 rgba(#000000, 0.25);
+  }
+
+  &__card-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__card-heading {
+    display: flex;
+  }
+
+  &__card-icon {
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  &__card-info {
+    margin-left: 8px;
+  }
+
+  &__card-name {
+    width: 100%;
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  &__card-age,
+  &__card-gender {
+    display: inline-block;
+    width: fit-content;
+    font-size: 12px;
+  }
+
+  &__card-age {
+  }
+
+  &__card-gender {
+    margin-left: 20px;
+  }
+
+  &__card-hobbies {
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+  }
+
+  &__card-hobby {
+    background-color: var.$base-main-color;
+    color: var.$base-btn-font-color;
+    padding: 5px;
+    border-radius: 10px;
+
+    &:not(:first-child) {
+      margin-left: 7px;
+    }
+  }
+
+  &__card-hobby-text {
+    font-size: 12px;
+  }
+
+  &__context {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  &__pagenation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+
+    &-item {
+      position: relative;
+      background-color: var.$base-background-color;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+
+      &:not(:first-child) {
+        margin-left: 20px;
+      }
+    }
+
+    &-prev,
+    &-next {
+      background-color: transparent;
+    }
+
+    &-prev {
+    }
+
+    &__next {
+    }
+
+    &-link {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var.$base-font-color;
+    }
+  }
+}

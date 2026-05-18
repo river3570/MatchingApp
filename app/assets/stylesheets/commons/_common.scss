@@ -5,6 +5,7 @@ body {
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 100%;
   min-height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
 .container {
@@ -17,6 +18,10 @@ input,
 select {
   border: none;
   padding: 10px 10px;
+}
+
+li {
+  list-style: none;
 }
 
 input[type="submit"] {
