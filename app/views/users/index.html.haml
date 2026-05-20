@@ -15,7 +15,7 @@
           = ""
           .user-list__card-container
             .user-list__card-heading 
-              = image_tag user.user_image || "unknown.png", alt: "user-icon", class: "user-list__card-icon"
+              = image_tag "users/#{user.user_image || "unknown.png"}", alt: "user-icon", class: "user-list__card-icon"
               .user-list__card-info 
                 %h3.user-list__card-name 
                   = user.nickname
