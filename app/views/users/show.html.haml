@@ -7,22 +7,22 @@
         %h2.user-detail__title 
           基本情報
         %h3.user-detail__nickname
-          = @user.nickname
+          #{@user.nickname}さん
         %p.user-detail__age 
           #{@user.age}歳
-        %p.userdetail__gender
+        %p.user-detail__gender
           = @user.gender.name
       %p.user-detail__like-text 
         %span.user-detail__like-icon--unfollow 
           &hearts;
         つながりたい 
-      .user-detail__hobbies 
-        %p.user-detail__hobby-label 
-          趣味： 
-        - @user.hobbies.each do |hobby|
-          .user-detail__hobby 
-            %p.user-detail__hobby-text
-              = hobby.name
+    .user-detail__hobbies 
+      %p.user-detail__hobby-label 
+        趣味： 
+      - @user.hobbies.each do |hobby|
+        .user-detail__hobby 
+          %p.user-detail__hobby-text
+            = hobby.name
     .user-detail__introduction 
       %h3.user-detail__introduction-label
         自己紹介
