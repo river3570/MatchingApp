@@ -11,7 +11,7 @@
         %option{:value => "4"} 50代以上
     .user-list__cards 
       - @users.each do |user|
-        = link_to new_user_session_path, class: "user-list__card" do
+        = link_to user_path(user.id), class: "user-list__card" do
           = ""
           .user-list__card-container
             .user-list__card-heading 
