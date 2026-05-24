@@ -9,7 +9,7 @@
         = link_to "通知", new_user_session_path, class: "header__nav-link"
         = link_to "チャット", new_user_session_path, class: "header__nav-link"
         .header__img-container
-          = image_tag 'user-icon.jpg', alt: "user-icon", class: "header__user-icon"
+          = image_tag "users/#{user.user_image || "unknown.png"}", alt: "user-icon", class: "header__user-icon"
           %ul.dropdown
             %li.dropdown__item
               = link_to "マイページ", new_user_session_path, class: "dropdown__item-link"

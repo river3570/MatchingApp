@@ -1,1 +1,34 @@
-%h1 ユーザー一覧画面
+.user-list
+  .user-list__container 
+    .user-list__heading 
+      %h1.user-list__title ユーザー一覧
+      = select_tag :hobby_id, options_from_collection_for_select(Hobby.all, :id, :name), include_blank: "趣味", class: "user-list__hobby-lists"
+      %select.user-list__age-lists{:name => "age"}
+        %option{:value => "0"} 年齢
+        %option{:value => "1"} 20代
+        %option{:value => "2"} 30代
+        %option{:value => "3"} 40代
+        %option{:value => "4"} 50代以上
+    .user-list__cards 
+      - @users.each do |user|
+        = link_to new_user_session_path, class: "user-list__card" do
+          = ""
+          .user-list__card-container
+            .user-list__card-heading 
+              = image_tag "users/#{user.user_image || "unknown.png"}", alt: "user-icon", class: "user-list__card-icon"
+              .user-list__card-info 
+                %h3.user-list__card-name 
+                  = user.nickname
+                %p.user-list__card-age 
+                  #{user.age}歳 
+                %p.user-list__card-gender 
+                  = user.gender.name 
+            .user-list__card-hobbies
+              - user.hobbies.each do |hobby|
+                .user-list__card-hobby 
+                  %p.user-list__card-hobby-text
+                    = hobby.name
+            %p.user-list__context
+              = user.introduction
+    = paginate @users
+ 

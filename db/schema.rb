@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_29_100512) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_121647) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -23,18 +23,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_100512) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "genres", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "name", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "hobbies", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.integer "genere_id"
     t.string "name", null: false
     t.datetime "updated_at", null: false
-    t.index ["genere_id"], name: "index_hobbies_on_genere_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -88,6 +80,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_100512) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "gender_id", null: false
+    t.string "introduction"
     t.string "nickname", null: false
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
@@ -99,7 +92,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_100512) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "hobbies", "generes"
   add_foreign_key "likes", "users", column: "like_user_id_id"
   add_foreign_key "likes", "users", column: "liked_uesr_id_id"
   add_foreign_key "messages", "conversations"
