@@ -4,8 +4,6 @@
       .user-detail__icon-container
         = image_tag "users/#{@user.user_image || "unknown.png"}", alt: "user-icon", class: "user-detail__icon"
       .user-detail__basic-info 
-        %h2.user-detail__title 
-          基本情報
         %h3.user-detail__nickname
           #{@user.nickname}さん
         %p.user-detail__age 
