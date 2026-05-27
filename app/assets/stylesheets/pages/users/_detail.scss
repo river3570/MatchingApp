@@ -56,6 +56,14 @@
     }
   }
 
+  &__edit-btn {
+    background-color: var.$base-main-color;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 2rem;
+  }
+
   &__hobbies {
     display: flex;
     align-items: center;

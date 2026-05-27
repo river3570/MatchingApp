@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_19_121647) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_26_124226) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -32,10 +32,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_121647) do
   create_table "likes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.integer "like_user_id_id"
-    t.integer "liked_uesr_id_id"
+    t.integer "liked_user_id_id"
     t.datetime "updated_at", null: false
     t.index ["like_user_id_id"], name: "index_likes_on_like_user_id_id"
-    t.index ["liked_uesr_id_id"], name: "index_likes_on_liked_uesr_id_id"
+    t.index ["liked_user_id_id"], name: "index_likes_on_liked_user_id_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -93,7 +93,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_121647) do
   end
 
   add_foreign_key "likes", "users", column: "like_user_id_id"
-  add_foreign_key "likes", "users", column: "liked_uesr_id_id"
+  add_foreign_key "likes", "users", column: "liked_user_id_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
