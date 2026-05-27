@@ -1,0 +1,31 @@
+.user-detail
+  .user-detail__container 
+    .user-detail__info 
+      .user-detail__icon-container
+        = image_tag "users/#{@user.user_image || "unknown.png"}", alt: "user-icon", class: "user-detail__icon"
+      .user-detail__basic-info 
+        %h3.user-detail__nickname
+          #{@user.nickname}さん
+        %p.user-detail__age 
+          #{@user.age}歳
+        %p.user-detail__gender
+          = @user.gender.name
+      - if current_user.id == @user.id
+        = link_to "プロフィール編集", user_path(@user.id), class: 'user-detail__edit-btn'
+      - else
+        %p.user-detail__like-text 
+          %span.user-detail__like-icon--unfollow 
+            &hearts;
+          つながりたい 
+    .user-detail__hobbies 
+      %p.user-detail__hobby-label 
+        趣味： 
+      - @user.hobbies.each do |hobby|
+        .user-detail__hobby 
+          %p.user-detail__hobby-text
+            = hobby.name
+    .user-detail__introduction 
+      %h3.user-detail__introduction-label
+        自己紹介
+      %p.user-detail__introduction-text
+        = @user.introduction

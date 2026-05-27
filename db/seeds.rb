@@ -61,6 +61,13 @@ user_hobbies_data = [
   { email: 'nagano@example.com', hobby_name: "プログラミング" },
 ]
 
+likes_data = [
+  { like_email: 'sato@example.com', liked_email: 'suzuki@example.com'},
+  { like_email: 'sato@example.com', liked_email: 'nagano1@example.com'},
+  { like_email: 'sato@example.com', liked_email: 'nagano2@example.com'},
+  { like_email: 'suzuki@example.com', liked_email: 'sato@example.com'},
+]
+
 genders_data.each do |gender_data|
   Gender.find_or_create_by!(name: gender_data[:name])
 end
@@ -84,4 +91,13 @@ user_hobbies_data.each do |data|
   user  = User.find_by!(email: data[:email])
   hobby = Hobby.find_by!(name: data[:hobby_name])
   UserHobby.find_or_create_by!(user: user, hobby: hobby)
+end
+
+likes_data.each do |like_data|
+  like_user  = User.find_by!(email: like_data[:like_email])
+  liked_user = User.find_by!(email: like_data[:liked_email])
+  Like.find_or_create_by!(
+    like_user_id_id: like_user.id,
+    liked_uesr_id_id: liked_user.id
+  )
 end
