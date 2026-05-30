@@ -1,34 +1,21 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    %p= f.label :email
-    %p= f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    %p
-      = f.label :password
-      %i (leave blank if you don't want to change it)
-    %p= f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %p
-        %em
-          = @minimum_password_length
-          characters minimum
-  .field
-    %p= f.label :password_confirmation
-    %p= f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    %p
-      = f.label :current_password
-      %i (we need your current password to confirm your changes)
-    %p= f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%div
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete}
-= link_to "Back", :back
+.user-edit 
+  .user-edit__container 
+    = form_with model: @user, html: { class: "user-edit__form"} do |f| 
+      .user-edit__field
+        %p= f.label :user_image, "アイコン", class: "user-edit__label"
+        %p= f.file_field :user_image, autofocus: true, autocompete: "user_image", class: "user-edit__input", placeholder: "アイコン"
+      .user-edit__field
+        %p= f.label :nickname, "ニックネーム", class: "user-edit__label"
+        %p= f.text_field :nickname, autocompete: "nickname", class: "user-edit__input", placeholder: "ニックネーム"
+      .user-edit__field
+        %p= f.label :age, "年齢", class: "user-edit__label"
+        %p= f.number_field :age, autocompete: "age", class: "user-edit__input", placeholder: "年齢"
+      .user-edit__field
+        %p= f.label :gender, "性別", class: "user-edit__label"
+        %p= f.collection_select :gender_id, Gender.all, :id, :name, {class: "user-edit__input"}
+      .user-edit__field
+        %p= f.label :hobby, "趣味", class: "user-edit__label"
+        %p= f.collection_select :hobby, Hobby.all, :id, :name, {class: "user-edit__input"}
+      .user-edit__field
+        %p= f.label :introduction, "自己紹介", class: "user-edit__label"
+        %p= f.email_field :introduction, autocompete: "introduction", class: "user-edit__input", placeholder: "〇〇が趣味です。よろしくお願いします。"

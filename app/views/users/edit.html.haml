@@ -1,0 +1,21 @@
+.user-edit 
+  .user-edit__container 
+    = form_with model: @user, html: { class: "user-edit__form"} do |f| 
+      .user-edit__field
+        %p= f.label :email, "メールアドレス", class: "user-edit__label"
+        %p= f.email_field :email, autofocus: true, autocompete: "email", class: "user-edit__input", placeholder: "メールアドレス"
+      .user-edit__field
+        %p= f.label :nickname, "ニックネーム", class: "user-edit__label"
+        %p= f.text_field :nickname, autocompete: "nickname", class: "user-edit__input", placeholder: "ニックネーム"
+      .user-edit__field
+        %p= f.label :age, "年齢", class: "user-edit__label"
+        %p= f.number_field :age, autocompete: "age", class: "user-edit__input", placeholder: "年齢"
+      .user-edit__field
+        %p= f.label :gender, "性別", class: "user-edit__label"
+        %p= f.email_field :gender, autocompete: "gender", class: "user-edit__input", placeholder: "性別"
+      .user-edit__field
+        %p= f.label :email, "メールアドレス", class: "user-edit__label"
+        %p= f.email_field :email, autocompete: "email", class: "user-edit__input", placeholder: "メールアドレス"
+      .user-edit__field
+        %p= f.label :email, "メールアドレス", class: "user-edit__label"
+        %p= f.email_field :email, autocompete: "email", class: "user-edit__input", placeholder: "メールアドレス"
