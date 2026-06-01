@@ -1,21 +1,30 @@
-.user-edit 
-  .user-edit__container 
-    = form_with model: @user, html: { class: "user-edit__form"} do |f| 
-      .user-edit__field
+.user-edit
+  .user-edit__container
+    = form_with model: @user, html: { class: "user-edit__form" } do |f|
+      .user-edit__field{ data: { controller: "avatar" } }
         %p= f.label :user_image, "アイコン", class: "user-edit__label"
-        %p= f.file_field :user_image, autofocus: true, autocompete: "user_image", class: "user-edit__input", placeholder: "アイコン"
+        - avatar_url = @user.user_image.attached? ? url_for(@user.user_image.variant(resize_to_limit: [500, 500])) : asset_path("unknown.png")
+        = f.file_field :user_image, accept: "image/*", class: "user-edit__input", data: { avatar_target: "input", action: "change->avatar#preview" }
+        = image_tag avatar_url, class: "profile-avatar-image", data: { avatar_target: "preview" }
+      
       .user-edit__field
         %p= f.label :nickname, "ニックネーム", class: "user-edit__label"
-        %p= f.text_field :nickname, autocompete: "nickname", class: "user-edit__input", placeholder: "ニックネーム"
+        %p= f.text_field :nickname, autocomplete: "nickname", class: "user-edit__input", placeholder: "ニックネーム"
+
       .user-edit__field
         %p= f.label :age, "年齢", class: "user-edit__label"
-        %p= f.number_field :age, autocompete: "age", class: "user-edit__input", placeholder: "年齢"
+        %p= f.number_field :age, autocomplete: "age", class: "user-edit__input", placeholder: "年齢"
+
       .user-edit__field
         %p= f.label :gender, "性別", class: "user-edit__label"
-        %p= f.collection_select :gender_id, Gender.all, :id, :name, {class: "user-edit__input"}
+        %p= f.collection_select :gender_id, Gender.all, :id, :name
+
       .user-edit__field
         %p= f.label :hobby, "趣味", class: "user-edit__label"
-        %p= f.collection_select :hobby, Hobby.all, :id, :name, {class: "user-edit__input"}
+        %p= f.collection_select :hobby_id, Hobby.all, :id, :name
+
       .user-edit__field
         %p= f.label :introduction, "自己紹介", class: "user-edit__label"
-        %p= f.email_field :introduction, autocompete: "introduction", class: "user-edit__input", placeholder: "〇〇が趣味です。よろしくお願いします。"
+        %p= f.text_area :introduction, autocomplete: "introduction", class: "user-edit__input", placeholder: "〇〇が趣味です。よろしくお願いします。"
+
+      = f.submit "保存"
