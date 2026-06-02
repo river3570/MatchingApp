@@ -1,21 +1,42 @@
-.user-edit 
-  .user-edit__container 
-    = form_with model: @user, html: { class: "user-edit__form"} do |f| 
-      .user-edit__field
-        %p= f.label :email, "メールアドレス", class: "user-edit__label"
-        %p= f.email_field :email, autofocus: true, autocompete: "email", class: "user-edit__input", placeholder: "メールアドレス"
+.user-edit
+  .user-edit__container
+    = form_with model: @user, html: { class: "user-edit__form" } do |f|
+      .user-edit__field.user-edit__field-icon{ data: { controller: "avatar" } }
+        .user-edit__field-left
+          %p= f.label :user_image, "アイコン", class: "user-edit__label"
+          = f.file_field :user_image, accept: "image/*", class: "user-edit__input", data: { avatar_target: "input", action: "change->avatar#preview" }
+
+        - avatar_url = @user.user_image.attached? ? url_for(@user.user_image.variant(resize_to_limit: [500, 500])) : asset_path("unknown.png")
+        = image_tag avatar_url, class: "user-edit__image-preview", data: { avatar_target: "preview" }
+      
       .user-edit__field
         %p= f.label :nickname, "ニックネーム", class: "user-edit__label"
-        %p= f.text_field :nickname, autocompete: "nickname", class: "user-edit__input", placeholder: "ニックネーム"
+        %p= f.text_field :nickname, autocomplete: "nickname", class: "user-edit__input", placeholder: "ニックネーム"
+
+      .user-edit__fields
+        .user-edit__field
+          %p= f.label :age, "年齢", class: "user-edit__label"
+          %p= f.number_field :age, autocomplete: "age", class: "user-edit__input", placeholder: "年齢"
+
+        .user-edit__field
+          %p= f.label :gender, "性別", class: "user-edit__label"
+          %p= f.collection_select :gender_id, Gender.all, :id, :name, {}, {class: "user-edit__input"}
+
+      .user-edit__field{ data: { controller: "hobby" } }
+        %p= f.label :hobby, "趣味(最大３つ)", class: "user-edit__label"
+        %p= f.collection_select :hobby_id, Hobby.all, :id, :name, {}, {class: "user-edit__input"}
+        %ul.user-edit__hobbies
+          - @user.hobbies.each do |hobby|
+            %li.user-edit__hobby{ data: { hobby_id: hobby.id} }
+              = hobby.name
+              %button.user-edit__button-remove{ type: "button", data: { action: "click->hobby#remove" } } ×
+          
+          .user-edit__hidden-hobby 
+            - @user.hobbies.each do |hobby|
+              = hidden_field_tag "user[hobby_ids][]", hobby.id, data: { hobby_id: hobby.id }
+
       .user-edit__field
-        %p= f.label :age, "年齢", class: "user-edit__label"
-        %p= f.number_field :age, autocompete: "age", class: "user-edit__input", placeholder: "年齢"
-      .user-edit__field
-        %p= f.label :gender, "性別", class: "user-edit__label"
-        %p= f.email_field :gender, autocompete: "gender", class: "user-edit__input", placeholder: "性別"
-      .user-edit__field
-        %p= f.label :email, "メールアドレス", class: "user-edit__label"
-        %p= f.email_field :email, autocompete: "email", class: "user-edit__input", placeholder: "メールアドレス"
-      .user-edit__field
-        %p= f.label :email, "メールアドレス", class: "user-edit__label"
-        %p= f.email_field :email, autocompete: "email", class: "user-edit__input", placeholder: "メールアドレス"
+        %p= f.label :introduction, "自己紹介", class: "user-edit__label"
+        %p= f.text_area :introduction, autocomplete: "introduction", class: "user-edit__input user-edit__input-introduction", placeholder: "〇〇が趣味です。よろしくお願いします。"
+
+      = f.submit "保存", class: "user-edit__submit"
