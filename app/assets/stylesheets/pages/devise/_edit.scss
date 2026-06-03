@@ -1,0 +1,107 @@
+@use "../../commons/variables" as var;
+
+.user-edit {
+  margin-top: 85px;
+
+  &__container {
+    max-width: 506px;
+    margin: 0 auto;
+  }
+
+  &__form {
+    > :not(:first-child) {
+      margin-top: 35px;
+    }
+  }
+
+  &__field {
+  }
+
+  &__fields {
+    display: flex;
+    align-items: center;
+
+    > :nth-child(2) {
+      margin-left: 36px;
+    }
+  }
+
+  &__field-left {
+  }
+
+  &__field-icon {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label {
+  }
+
+  &__input {
+    border: solid var.$base-main-color 1px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  &__input-introduction {
+    width: 100%;
+    height: 250px;
+  }
+
+  &__input-age {
+    max-width: 80px;
+  }
+
+  &__image-preview {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center center;
+    margin-left: 110px;
+  }
+
+  &__hobby-content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__hobbies {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 5px 0 0;
+  }
+
+  &__hobby {
+    display: flex;
+    align-items: center;
+    background-color: var.$base-main-color;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 12px;
+    color: white;
+
+    &:not(:first-child) {
+      margin-left: 18px;
+    }
+  }
+
+  &__button-remove {
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+  }
+
+  &__hidden-hobby {
+  }
+
+  &__submit {
+    color: white;
+    background-color: var.$base-main-color;
+    border-radius: 10px;
+    padding: 10px 20px;
+    letter-spacing: 2px;
+  }
+}

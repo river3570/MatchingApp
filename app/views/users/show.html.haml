@@ -2,7 +2,7 @@
   .user-detail__container 
     .user-detail__info 
       .user-detail__icon-container
-        = image_tag "users/#{@user.user_image || "unknown.png"}", alt: "user-icon", class: "user-detail__icon"
+        = image_tag @user.user_image.attached? ? url_for(@user.user_image) : "users/unknown.png", alt: "user-icon", class: "user-detail__icon"
       .user-detail__basic-info 
         %h3.user-detail__nickname
           #{@user.nickname}さん
@@ -11,7 +11,7 @@
         %p.user-detail__gender
           = @user.gender.name
       - if current_user.id == @user.id
-        = link_to "プロフィール編集", user_path(@user.id), class: 'user-detail__edit-btn'
+        = link_to "プロフィール編集", edit_user_path(@user), class: 'user-detail__edit-btn'
       - else
         %p.user-detail__like-text 
           %span.user-detail__like-icon--unfollow 
