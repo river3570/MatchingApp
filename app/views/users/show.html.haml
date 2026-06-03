@@ -11,7 +11,7 @@
         %p.user-detail__gender
           = @user.gender.name
       - if current_user.id == @user.id
-        = link_to "プロフィール編集", edit_user_registration_path(@user), class: 'user-detail__edit-btn'
+        = link_to "プロフィール編集", edit_user_path(@user), class: 'user-detail__edit-btn'
       - else
         %p.user-detail__like-text 
           %span.user-detail__like-icon--unfollow 
