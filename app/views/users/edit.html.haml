@@ -16,7 +16,7 @@
       .user-edit__fields
         .user-edit__field
           %p= f.label :age, "年齢", class: "user-edit__label"
-          %p= f.number_field :age, autocomplete: "age", class: "user-edit__input", placeholder: "年齢"
+          %p= f.number_field :age, autocomplete: "age", class: "user-edit__input user-edit__input-age", placeholder: "年齢"
 
         .user-edit__field
           %p= f.label :gender, "性別", class: "user-edit__label"
@@ -24,16 +24,16 @@
 
       .user-edit__field{ data: { controller: "hobby" } }
         %p= f.label :hobby, "趣味(最大３つ)", class: "user-edit__label"
-        %p= f.collection_select :hobby_id, Hobby.all, :id, :name, {}, {class: "user-edit__input"}
-        %ul.user-edit__hobbies
+        %p= f.collection_select :hobby_id, Hobby.all, :id, :name, {}, {class: "user-edit__input", data: { hobby_target: "select", action: "change->hobby#add" }} 
+        %ul.user-edit__hobbies{ data: {hobby_target: "list"} }
           - @user.hobbies.each do |hobby|
             %li.user-edit__hobby{ data: { hobby_id: hobby.id} }
               = hobby.name
               %button.user-edit__button-remove{ type: "button", data: { action: "click->hobby#remove" } } ×
           
-          .user-edit__hidden-hobby 
-            - @user.hobbies.each do |hobby|
-              = hidden_field_tag "user[hobby_ids][]", hobby.id, data: { hobby_id: hobby.id }
+        .user-edit__hidden-hobby{ data: {hobby_target: "hiddenHobbyContainer"} }
+          - @user.hobbies.each do |hobby|
+            = hidden_field_tag "user[hobby_ids][]", hobby.id, data: { hobby_id: hobby.id }
 
       .user-edit__field
         %p= f.label :introduction, "自己紹介", class: "user-edit__label"
