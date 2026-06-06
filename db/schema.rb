@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_30_132456) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_06_074633) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -79,8 +79,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_30_132456) do
   create_table "notifications", force: :cascade do |t|
     t.string "context", null: false
     t.datetime "created_at", null: false
+    t.integer "partner_id", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["partner_id"], name: "index_notifications_on_partner_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -126,6 +128,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_30_132456) do
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "partner_id"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
   add_foreign_key "user_hobbies", "hobbies"
