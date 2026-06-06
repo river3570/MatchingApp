@@ -171,12 +171,12 @@ user_hobbies_data = [
 ]
 
 likes_data = [
-  # 佐藤 → 複数人にいいね
+  # 佐藤
   { like_email: 'sato@example.com',     liked_email: 'suzuki@example.com' },
   { like_email: 'sato@example.com',     liked_email: 'tanaka@example.com' },
   { like_email: 'sato@example.com',     liked_email: 'watanabe@example.com' },
 
-  # 鈴木 ↔ 佐藤（相互いいね＝マッチング）
+  # 鈴木
   { like_email: 'suzuki@example.com',   liked_email: 'sato@example.com' },
   { like_email: 'suzuki@example.com',   liked_email: 'kobayashi@example.com' },
   { like_email: 'suzuki@example.com',   liked_email: 'yamada@example.com' },
@@ -230,6 +230,25 @@ likes_data = [
   { like_email: 'mori@example.com',     liked_email: 'sato@example.com' },
 ]
 
+notifications_data = [
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 2},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 3},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 4},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 5},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 6},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 7},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 8},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 9},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 10},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 11},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 12},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 13},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 14},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 15},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 16},
+  {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 17},
+]
+
 genders_data.each do |gender_data|
   Gender.find_or_create_by!(name: gender_data[:name])
 end
@@ -270,5 +289,13 @@ likes_data.each do |like_data|
   Like.find_or_create_by!(
     like_user_id: like_user.id,
     liked_user_id: liked_user.id
+  )
+end
+
+notifications_data.each do |notification_data|
+  Notification.find_or_create_by!(
+    context: notification_data[:context],
+    user_id: notification_data[:user_id],
+    partner_id: notification_data[:partner_id]
   )
 end
