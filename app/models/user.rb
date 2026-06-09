@@ -9,9 +9,23 @@ class User < ApplicationRecord
   has_many :user_hobbies, dependent: :destroy
   has_many :hobbies, through: :user_hobbies
 
-  has_many :like_likes, class_name: 'Like', foreign_key: 'like_user_id', inverse_of: :like_user, dependent: :destroy
-  has_many :liked_likes, class_name: 'Like', foreign_key: 'liked_user_id', inverse_of: :liked_user, dependent: :destroy
+  has_many :sent_likes,     class_name: 'Relationship', foreign_key: 'liker_id', inverse_of: :liker, dependent: :destroy
+  has_many :received_likes, class_name: 'Relationship', foreign_key: 'liked_id', inverse_of: :liked, dependent: :destroy
 
-  has_many :like_users,  through: :like_likes,  source: :liked_user
-  has_many :liked_users, through: :liked_likes, source: :like_user
+  # 自分をいいねしたユーザー一覧
+  has_many :likers,      through: :received_likes, source: :liker
+  # 自分がいいねをしたユーザー一覧
+  has_many :liked_users, through: :sent_likes,     source: :liked
+
+  has_many :sent_messages, class_name: 'Message', inverse_of: :user, dependent: :destroy
+
+  # 相互フォロー取得
+  def matched_users
+    likers & liked_users
+  end
+
+  # 会話取得
+  def conversations
+    Conversation.where(user1: self).or(Conversation.where(user2: self))
+  end
 end

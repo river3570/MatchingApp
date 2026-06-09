@@ -1,0 +1,128 @@
+@use "../../commons/variables" as var;
+
+.message-conversations {
+  display: flex;
+  width: 100vw;
+  min-height: calc(100vh - 160px);
+  margin-left: calc(50% - 50vw);
+
+  .message {
+    position: relative;
+    width: 320px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 1px;
+      height: calc(100% + 50px);
+      background-color: black;
+    }
+
+    &__container {
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-size: 1.25rem;
+      text-align: center;
+      padding: 10px;
+    }
+
+    &__user-info {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      border-top: 1px solid black;
+      padding: 5px;
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: 1px solid black;
+      }
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &__user-text {
+      margin-left: 0.3125rem;
+      flex-grow: 1;
+    }
+
+    &__user-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    &__nickname {
+      font-size: 1rem;
+    }
+
+    &__context {
+      font-size: 1rem;
+    }
+
+    &__date {
+      display: block;
+      font-size: 1rem;
+      text-align: right;
+    }
+  }
+
+  .user-message {
+    flex: 1;
+    margin-top: 10px;
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      width: 95%;
+      margin: 0 auto;
+    }
+
+    &__user-info {
+      display: flex;
+
+      &:not(:first-child) {
+        margin-top: 15px;
+      }
+
+      &--current-user {
+        align-self: flex-end;
+      }
+    }
+
+    &__user-text {
+      margin-left: 5px;
+    }
+
+    &__icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    &__nickname {
+    }
+
+    &__context {
+      background-color: #d9d9d9;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    &__date {
+      display: block;
+      text-align: left;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
   def index
-    @relationship_users = User.first
+    @conversations = current_user.conversations
   end
 end
