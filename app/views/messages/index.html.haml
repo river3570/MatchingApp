@@ -6,9 +6,9 @@
         .message__user-info
           = image_tag conversation.partner(current_user).user_image.attached? ? url_for(conversation.partner(current_user).user_image) : "users/unknown.png", alt: "user-icon", class: "message__user-icon"
           .message__user-text
-            %p.message__nickname=    conversation.partner(current_user).nickname
-            %p.message__context=    conversation.messages.last&.message || 'メッセージはありません'
-            %time.message__date= conversation.messages.last&.created_at&.strftime('%Y年%m月%d日')
+            %p.message__nickname= conversation.partner(current_user).nickname
+            %p.message__context=  conversation.messages.last&.message || 'メッセージはありません'
+            %time.message__date=  conversation.messages.last&.created_at&.strftime('%Y年%m月%d日')
   
   .user-message 
     .user-message__container 
