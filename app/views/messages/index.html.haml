@@ -1,18 +1,18 @@
 .message-conversations
-  .message 
+  .message
     .message__container 
       %h2.message__title メッセージ
       - @conversations.each do |conversation|
-        .message__user-info
+        = link_to messages_path(id: conversation.partner(current_user)), class: "message__user-info", data: { turbo_frame: "messages" } do
           = image_tag conversation.partner(current_user).user_image.attached? ? url_for(conversation.partner(current_user).user_image) : "users/unknown.png", alt: "user-icon", class: "message__user-icon"
           .message__user-text
             %p.message__nickname= conversation.partner(current_user).nickname
             %p.message__context=  conversation.messages.last&.message || 'メッセージはありません'
             %time.message__date=  conversation.messages.last&.created_at&.strftime('%Y年%m月%d日')
   
-  .user-message 
-    .user-message__container 
-      - @conversations.first.messages.each do |message|
+  .user-message
+    = turbo_frame_tag "messages", class: "user-message__container" do
+      - @messages.each do |message|
         - if current_user != message.user
           .user-message__user-info
             = image_tag message.user.user_image.attached? ? url_for(message.user.user_image) : "users/unknown.png", alt: "user-icon", class: "user-message__icon"
@@ -23,5 +23,5 @@
         - else
           .user-message__user-info.user-message__user-info--current-user
             .user-message__user-text
-              %p.user-message__context=  message.message
-              %time.user-message__date=  message.created_at.strftime('%Y年%m月%d日')
+              %p.user-message__context= message.message
+              %time.user-message__date= message.created_at.strftime('%Y年%m月%d日')
