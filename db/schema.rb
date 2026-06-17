@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_06_074633) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_07_115655) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -41,8 +41,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_06_074633) do
 
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "name", null: false
     t.datetime "updated_at", null: false
+    t.integer "user1_id", null: false
+    t.integer "user2_id", null: false
+    t.index ["user1_id"], name: "index_conversations_on_user1_id"
+    t.index ["user2_id"], name: "index_conversations_on_user2_id"
   end
 
   create_table "genders", force: :cascade do |t|
@@ -57,19 +60,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_06_074633) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.integer "like_user_id"
-    t.integer "liked_user_id"
-    t.datetime "updated_at", null: false
-    t.index ["like_user_id"], name: "index_likes_on_like_user_id"
-    t.index ["liked_user_id"], name: "index_likes_on_liked_user_id"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.integer "conversation_id"
     t.datetime "created_at", null: false
-    t.string "string", null: false
+    t.string "message", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
@@ -84,6 +78,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_06_074633) do
     t.integer "user_id"
     t.index ["partner_id"], name: "index_notifications_on_partner_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "liked_id"
+    t.integer "liker_id"
+    t.datetime "updated_at", null: false
+    t.index ["liked_id"], name: "index_relationships_on_liked_id"
+    t.index ["liker_id"], name: "index_relationships_on_liker_id"
   end
 
   create_table "user_conversations", force: :cascade do |t|
@@ -123,12 +126,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_06_074633) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "likes", "users", column: "like_user_id"
-  add_foreign_key "likes", "users", column: "liked_user_id"
+  add_foreign_key "conversations", "users", column: "user1_id"
+  add_foreign_key "conversations", "users", column: "user2_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "notifications", "users", column: "partner_id"
+  add_foreign_key "relationships", "users", column: "liked_id"
+  add_foreign_key "relationships", "users", column: "liker_id"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
   add_foreign_key "user_hobbies", "hobbies"

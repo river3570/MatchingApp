@@ -170,7 +170,7 @@ user_hobbies_data = [
   { email: 'mori@example.com',     hobby_name: "映画" },
 ]
 
-likes_data = [
+relationships_data = [
   # 佐藤
   { like_email: 'sato@example.com',     liked_email: 'suzuki@example.com' },
   { like_email: 'sato@example.com',     liked_email: 'tanaka@example.com' },
@@ -184,6 +184,7 @@ likes_data = [
   # 田中
   { like_email: 'tanaka@example.com',   liked_email: 'ito@example.com' },
   { like_email: 'tanaka@example.com',   liked_email: 'kimura@example.com' },
+  { like_email: 'tanaka@example.com',   liked_email: 'sato@example.com' },
 
   # 山田 ↔ 田中（相互いいね）
   { like_email: 'yamada@example.com',   liked_email: 'tanaka@example.com' },
@@ -195,6 +196,7 @@ likes_data = [
 
   # 渡辺 ↔ 小林（相互いいね）
   { like_email: 'watanabe@example.com', liked_email: 'kobayashi@example.com' },
+  { like_email: 'watanabe@example.com', liked_email: 'sato@example.com' },
   { like_email: 'kobayashi@example.com',liked_email: 'watanabe@example.com' },
 
   # 加藤
@@ -249,6 +251,25 @@ notifications_data = [
   {context: '鈴木太郎さんにフォローされました。', user_id: 1, partner_id: 17},
 ]
 
+conversation_datas = [
+  { user1: User.find_by!(email: 'sato@example.com'), user2: User.find_by!(email: 'tanaka@example.com') },
+  { user1: User.find_by!(email: 'suzuki@example.com'), user2: User.find_by!(email: 'sato@example.com') },
+  { user1: User.find_by!(email: 'sato@example.com'), user2: User.find_by!(email: 'watanabe@example.com') },
+]
+
+message_datas = [
+  # 佐藤さん to 田中さん
+  {conversation: Conversation.find_by!(id: 1), user: User.find_by!(email: 'sato@example.com'), message: '初めまして！！！'},
+  {conversation: Conversation.find_by!(id: 1), user: User.find_by!(email: 'tanaka@example.com'), message: 'こちらこそ、初めまして！！！'},
+  {conversation: Conversation.find_by!(id: 1), user: User.find_by!(email: 'sato@example.com'), message: 'あいうえお'},
+  
+  # 鈴木さん to 佐藤さん
+  {conversation: Conversation.find_by!(id: 2), user: User.find_by!(email: 'suzuki@example.com'), message: '初めまして！！！'},
+  {conversation: Conversation.find_by!(id: 2), user: User.find_by!(email: 'sato@example.com'), message: 'こちらこそ、初めまして！！！'},
+  {conversation: Conversation.find_by!(id: 2), user: User.find_by!(email: 'sato@example.com'), message: 'あいうえお'},
+  
+]
+
 genders_data.each do |gender_data|
   Gender.find_or_create_by!(name: gender_data[:name])
 end
@@ -283,12 +304,12 @@ user_hobbies_data.each do |data|
   UserHobby.find_or_create_by!(user: user, hobby: hobby)
 end
 
-likes_data.each do |like_data|
-  like_user  = User.find_by!(email: like_data[:like_email])
-  liked_user = User.find_by!(email: like_data[:liked_email])
-  Like.find_or_create_by!(
-    like_user_id: like_user.id,
-    liked_user_id: liked_user.id
+relationships_data.each do |relationship_data|
+  liker  = User.find_by!(email: relationship_data[:like_email])
+  liked = User.find_by!(email: relationship_data[:liked_email])
+  Relationship.find_or_create_by!(
+    liker_id: liker.id,
+    liked_id: liked.id
   )
 end
 
@@ -297,5 +318,20 @@ notifications_data.each do |notification_data|
     context: notification_data[:context],
     user_id: notification_data[:user_id],
     partner_id: notification_data[:partner_id]
+  )
+end
+
+conversation_datas.each do |conversation_data| 
+  Conversation.find_or_create_by!(
+    user1: conversation_data[:user1],
+    user2: conversation_data[:user2]
+  )
+end
+
+message_datas.each do |message_data|
+  Message.find_or_create_by!(
+    conversation: message_data[:conversation],
+    user: message_data[:user],
+    message: message_data[:message]
   )
 end

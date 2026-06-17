@@ -23,7 +23,6 @@ export default class extends Controller {
       data-action="click->hobby#remove">
       ×
       </button>
-
 `;
 
     this.listTarget.appendChild(li);
