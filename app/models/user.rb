@@ -17,7 +17,7 @@ class User < ApplicationRecord
   # 自分がいいねをしたユーザー一覧
   has_many :liked_users, through: :sent_likes,     source: :liked
 
-  has_many :sent_messages, class_name: 'Message', inverse_of: :user, dependent: :destroy
+  has_many :messages, class_name: 'Message', inverse_of: :user, dependent: :destroy
 
   # 相互フォロー取得
   def matched_users

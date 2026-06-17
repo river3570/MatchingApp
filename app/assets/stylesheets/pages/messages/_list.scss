@@ -77,14 +77,21 @@
   }
 
   .user-message {
+    position: relative;
     flex: 1;
     margin-top: 10px;
 
     &__container {
-      display: flex;
-      flex-direction: column;
+      display: block;
       width: 95%;
       margin: 0 auto;
+    }
+
+    .messages-list {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      height: 700px;
     }
 
     &__user-info {
@@ -123,6 +130,37 @@
     &__date {
       display: block;
       text-align: right;
+    }
+
+    .chat {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      transform: translate(-50%, -50%);
+      left: 50%;
+
+      .chat-form {
+        &__group {
+          width: 95%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+        }
+
+        &__input {
+          flex: 1;
+          border: solid 1px black;
+          border-radius: 10px;
+        }
+
+        &__btn {
+          margin-left: 10px;
+          color: white;
+          background-color: var.$base-main-color;
+          border-radius: 10px;
+          padding: 10px 20px;
+        }
+      }
     }
   }
 }

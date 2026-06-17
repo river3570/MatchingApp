@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :notifications, only: [:index]
-  resources :messages, only: [:index]
+  resources :messages, only: [:index, :create]
 end

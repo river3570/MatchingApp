@@ -1,0 +1,12 @@
+- if current_user != message.user
+  .user-message__user-info
+    = image_tag message.user.user_image.attached? ? url_for(message.user.user_image) : "users/unknown.png", alt: "user-icon", class: "user-message__icon"
+    .user-message__user-text
+      %p.user-message__nickname= message.user.nickname 
+      %p.user-message__context=  message.message
+      %time.user-message__date=  message.created_at.strftime('%Y年%m月%d日')
+- else
+  .user-message__user-info.user-message__user-info--current-user
+    .user-message__user-text
+      %p.user-message__context= message.message
+      %time.user-message__date= message.created_at.strftime('%Y年%m月%d日')
