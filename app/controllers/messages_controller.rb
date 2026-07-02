@@ -6,8 +6,6 @@ class MessagesController < ApplicationController
       @conversation =
         Conversation.find_by(user1: user, user2: current_user) ||
         Conversation.find_by(user1: current_user, user2: user)
-      Rails.logger.debug { "params[:id] = #{params[:id]}" }
-      Rails.logger.debug { "@conversation = #{@conversation.inspect}" }
       @messages = @conversation&.messages
     else
       @messages = []
