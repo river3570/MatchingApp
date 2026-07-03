@@ -7,6 +7,8 @@ class RelationshipsController < ApplicationController
       Conversation.create(user1: current_user, user2: user)
     end
 
+    Notification.create(user: user, partner: current_user, context: "#{user.nickname}さんがあなたと繋がりたいそうです！")
+
     redirect_to request.referer
   end
 

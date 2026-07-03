@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :user_hobbies, dependent: :destroy
   has_many :hobbies, through: :user_hobbies
 
+  has_many :notifications, dependent: :destroy
+
   has_many :sent_likes,     class_name: 'Relationship', foreign_key: 'liker_id', inverse_of: :liker, dependent: :destroy
   has_many :received_likes, class_name: 'Relationship', foreign_key: 'liked_id', inverse_of: :liked, dependent: :destroy
 
