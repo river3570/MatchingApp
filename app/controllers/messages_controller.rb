@@ -15,6 +15,9 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.build(message_params)
     if @message.save
+      user = @message.conversation.partner(current_user)
+      Notification.create!(user: user, partner: current_user, context: "#{current_user.nickname}さんからメッセージが届きました！")
+
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to messages_path }
