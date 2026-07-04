@@ -13,10 +13,18 @@
       - if current_user.id == @user.id
         = link_to "プロフィール編集", edit_user_path(@user), class: 'user-detail__edit-btn'
       - else
-        %p.user-detail__like-text 
-          %span.user-detail__like-icon--unfollow 
-            &hearts;
-          つながりたい 
+        - if current_user.liking?(@user)
+          = link_to user_relationships_path(@user.id), data: { turbo_method: :delete }, class: "user-detail__like-text" do
+            = ""
+            %span.user-detail__like-icon--unfollow 
+              &hearts;
+              いいね解除 
+        - else
+          = link_to user_relationships_path(@user.id), data: { turbo_method: :post }, class: "user-detail__like-text" do 
+            = ""
+            %span.user-detail__like-icon--unfollow 
+              &hearts;
+              いいね 
     .user-detail__hobbies 
       %p.user-detail__hobby-label 
         趣味： 
